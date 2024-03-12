@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Library.Models.Carte>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"><font color="#7B68EE">Carti</font> </h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Upsert" class="btn btn-outline-primary">
+                <i class="fa-solid fa-circle-plus"></i> &nbsp; Carte Noua
+            </a>
+        </div>
+    </div>
+    <br /><br />
+    @if (Model.Count() > 0)
+    {
+        <table class="table-bordered table-striped" style=" width:100%">
+            <thead>
+                <tr>
+                    <th>Nume</th>
+                    <th>Autor</th>
+                    <th>Pret</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="30%">@obj.Name</td>
+                        <td width="30%">@obj.Author</td>
+                        <td width="10%">@obj.Price</td>
+                        <td class="text-center">
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-route-Id="@obj.Id" asp-action="Upsert" class="btn btn-outline-info">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a asp-route-Id="@obj.Id" asp-action="Delete" class="btn btn-outline-danger">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Nici o carte</p>
+    }
+</div>
+

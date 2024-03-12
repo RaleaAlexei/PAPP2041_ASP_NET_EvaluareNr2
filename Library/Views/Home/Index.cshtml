@@ -1,0 +1,20 @@
+﻿@model Library.Models.ViewModels.HomeViewModel
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-md mb-1">
+            <a href="@Url.Action("FiltrarePret")" class="btn btn-primary">Filtrare după preț</a>
+        </div>
+        <div class="col-md mb-1">
+            <a href="@Url.Action("FiltrareAutor")" class="btn btn-primary">Filtrare după autor</a>
+        </div>
+        <div class="col-md mb-1">
+            <a href="@Url.Action("CartePretMax")" class="btn btn-primary">Carte cu preț maximal</a>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var prod in Model.Carti)
+        {
+            <partial name="_CarteCard" model="prod" />
+        }
+    </div>
+</div>

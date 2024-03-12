@@ -1,0 +1,110 @@
+﻿@model Library.Models.ViewModels.CarteViewModel
+@{
+    var title = "Adauga Carte";
+}
+<form method="post" enctype="multipart/form-data">
+    @if (Model.Carte.Id != 0)
+    {
+        title = "Editeaza Carte";
+        <input asp-for="Carte.Id" hidden />
+
+    }
+
+    <div class="border p-3">
+
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Edit Product</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Carte.Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Carte.Name" class="form-control" />
+                        <span asp-validation-for="Carte.Name" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Carte.Author"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Carte.Author" class="form-control" />
+                        <span asp-validation-for="Carte.Author" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Carte.Price"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Carte.Price" class="form-control" />
+                        <span asp-validation-for="Carte.Price" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        Image
+                    </div>
+                    <div class="col-8">
+                        <input type="file" name="files" id="uploadBox" accept="image/*" class="form-control" />
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            @if (Model.Carte.Id != 0)
+
+                            {
+                                <input type="submit" class="btn btn-outline-success w-100" value="Create" />
+
+                            }
+                            else
+                            {
+                                <input type="submit" onclick="return validateInput()" class="btn btn-outline-success w-100" value="Create" />
+                            }
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-outline-info w-100"> <i class="fa-solid fa-right-from-bracket"></i>Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4 offset-1 pt-4">
+                @* Keep this empty *@
+                <img src="@ShopConstants.ImagePath@Model.Carte.Image" width="100%" style="border-radius:5px; border:1px solid groove" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({ height: 250 });
+        });
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire(
+                    'Error!',
+                    'Please upload an Image!',
+                    'error'
+                )
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
