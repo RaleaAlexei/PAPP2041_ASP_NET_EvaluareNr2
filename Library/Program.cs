@@ -1,4 +1,4 @@
-using Library.Utility;
+using Boutique.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,7 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Library
+namespace Boutique
 {
     public class Program
     {
@@ -26,7 +26,7 @@ namespace Library
             // Configure services
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlite("Data Source=Biblioteca.db");
+                options.UseSqlite("Data Source=Flowers.db");
                 });
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                         .AddDefaultTokenProviders().AddDefaultUI()
@@ -97,7 +97,7 @@ namespace Library
         private static async Task CreateAdminUser(UserManager<IdentityUser> userManager)
         {
             string adminEmail = ShopConstants.AdminEmail;
-            string adminPassword = "YourStrongPassword123!";
+            string adminPassword = ShopConstants.AdminPassword;
 
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)
